@@ -1,0 +1,76 @@
+.color1 {color: #272c3a;}
+.color2 {color: #3e3d50;}
+.color3 {color: #625770;}
+.color4 {color: #957a9a;}
+.color5 {color: #d9a8cc;}
+
+/* MOBILE FIRST DESIGN*/
+
+a {
+   color: aliceblue;
+   
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   background-color: #d9a8cc;
+   color: aliceblue;
+}
+
+/* HEADER AND NAV BAR */
+
+.header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   background-color: #272c3a;
+}
+
+.nav-bar a {
+   width: 20%;
+}
+
+.nav-bar {
+   display: flex;
+   justify-content: flex-start;
+   background-color: #3e3d50;
+}
+
+.nav-bar-links {
+   display: none;
+}
+
+/* MAIN CONTENT (CENTER) AND SIDEBARS*/
+/* divided in 3. center goes first for mobile */
+
+.main {
+   display: flex;
+   flex-direction: column;
+}
+
+.sidebar-left {
+   order: 2;
+   background-color: #957a9a;
+   margin: 5%;
+}
+
+.center {
+   color: aquamarine;
+   background-color: #957a9a;
+   order: 1;
+   margin: 5%;
+}
+
+.sidebar-right {
+   order: 3;
+   background-color: #957a9a;
+   margin: 5%;
+}
+
+/* FOOTER */
+
+.footer {
+   background-color: #272c3a;
+}
+
