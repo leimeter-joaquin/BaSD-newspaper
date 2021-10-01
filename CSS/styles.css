@@ -8,7 +8,7 @@
 
 a {
    color: aliceblue;
-   
+   line-height: 0%;
 }
 
 .container {
@@ -20,18 +20,15 @@ a {
 
 /* HEADER AND NAV BAR */
 
-.header {
+header {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   min-height: 50px;
    background-color: #272c3a;
 }
 
-.nav-bar a {
-   width: 20%;
-}
-
-.nav-bar {
+nav {
    display: flex;
    justify-content: flex-start;
    background-color: #3e3d50;
@@ -50,7 +47,6 @@ a {
 }
 
 .sidebar-left {
-   order: 2;
    background-color: #957a9a;
    margin: 5%;
 }
@@ -58,12 +54,10 @@ a {
 .center {
    color: aquamarine;
    background-color: #957a9a;
-   order: 1;
    margin: 5%;
 }
 
 .sidebar-right {
-   order: 3;
    background-color: #957a9a;
    margin: 5%;
 }
@@ -72,5 +66,6 @@ a {
 
 .footer {
    background-color: #272c3a;
+   min-height: 50px;
 }
 
