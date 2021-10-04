@@ -1,35 +1,16 @@
 :root {
-   
-   /*--color1: #272c3a;
-   --color2: #3e3d50;
-   --color3: #625770;
-   --color4: #957a9a;
-   --color5: #d9a8cc;
-   --color6: #f0daea;*/
-
-   /*
-   --color1: #12295d;
-   --color2: #7c408f;
-   --color3: #00a3ff;
-   --color4: #00faff;
-   --color5: #4dffff;
-   */
-   
    --color1: #193751;
    --color2: #1b2f46;
    --color3: #516e79;
    --color4: #ced3da;
    --color5: #e2e1e1;
    --color6: #ffffff;
-   
  }
  
-/*  var(--color1) */
 
 /* MOBILE FIRST DESIGN*/
 
 body {
-   
    font-family: Verdana, Geneva, Tahoma, sans-serif;
    font-size: 30px;
 }
@@ -126,15 +107,15 @@ nav {
    background-color: var(--color 3);
 }
 
+.main a {
+   color: var(--color1);
+}
+
 .center {
    display: flex;
    flex-direction: column;
    justify-content: center;
    background-color: var(--color6);
-}
-
-.main a {
-   color: var(--color1);
 }
 
 .main-notices-featured {
@@ -195,7 +176,6 @@ nav {
 
 .footer {
    background-color: #272c3a;
-   /* max-width: 100%; */
    font-size: 15px;
    text-align: center;
 }
@@ -217,6 +197,10 @@ nav {
 /* Tablet screen code */
 
 @media only screen and (min-width: 600px) {
+   
+   a {
+      line-height: 100%;
+   }
 
    .main {
       flex-direction: row;
@@ -235,10 +219,6 @@ nav {
 
    .nav-bar-links {
       display: flex;
-   }
-
-   a {
-      line-height: 100%;
    }
 
    .hamburger-icon img {
@@ -272,12 +252,9 @@ nav {
       justify-content: center;
    }
 
-
 }
 
-
 /* Computer screen code */
-
 
 @media only screen and (min-width: 950px) {
 
@@ -306,7 +283,6 @@ nav {
    }
    
    .social img {
-      /* width: 50%; */
       height: 100px;
       padding-top: 10px;
    }
@@ -320,6 +296,5 @@ nav {
    .footer-links {
       margin: 0px 20%;
    }
-
 
 }
