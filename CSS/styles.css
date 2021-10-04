@@ -182,12 +182,12 @@ nav {
    align-items: flex-start
 }
 
-.noticeboard {
+.social {
    text-align: center;
    background-color: var(--color6);
 }
 
-.noticeboard img {
+.social img {
    width: 25%;
 }
 
@@ -258,11 +258,11 @@ nav {
       width: 100%;
    }
 
-   .noticeboard {
+   .social {
       width: 100%;
    }
-   
-   .noticeboard img {
+
+   .social img {
       width: 100px;
       height: 100px;
    }
@@ -301,11 +301,11 @@ nav {
       display: inline;
    }
 
-   .noticeboard {
+   .social {
       max-width: 230px;
    }
    
-   .noticeboard img {
+   .social img {
       /* width: 50%; */
       height: 100px;
       padding-top: 10px;
