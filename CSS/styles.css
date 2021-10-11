@@ -48,7 +48,6 @@ header {
 }
 
 .hamburger-icon img {
-   width: 3em;
    max-width: 100px;
 }
 
@@ -69,11 +68,7 @@ header {
 }
 
 .header-right {
-   margin-right: 1em;
    color: var(--color6);
-}
-
-.header-right {
    margin: 10px;
 }
 
@@ -90,7 +85,6 @@ nav {
    /*These flex properties are here because later I apply display:flex;*/
    flex-basis: 100%;
    justify-content: space-around;
-
 }
 
 .nav-bar-links a:hover {
@@ -271,7 +265,7 @@ nav {
    }
 
    .weather {
-      max-width: 230;
+      max-width: 230px;
    } 
 
    .main-notices img {
