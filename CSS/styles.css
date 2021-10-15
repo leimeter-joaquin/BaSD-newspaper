@@ -64,12 +64,17 @@ header {
 
 .header-left, .header-right p {
    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-   font-size: 40px;
+   font-size: 1.4rem;
 }
 
 .header-right {
+   display: flex;
    color: var(--color6);
    margin: 10px;
+}
+
+.header-right a {
+   margin: 0px 20px;
 }
 
 nav {
@@ -91,7 +96,7 @@ nav {
    text-decoration: underline;
 }
 
-/* MAIN CONTENT (CENTER) AND SIDEBARS*/
+/* MAIN CONTENT (CENTER) AND SIDEBARS AND FORM*/
 
 .main {
    display: flex;
@@ -110,6 +115,36 @@ nav {
    flex-direction: column;
    justify-content: center;
    background-color: var(--color6);
+}
+
+form {
+   width: 100%;
+   height: 100%;
+   font-size: 1.5rem;
+}
+
+form > div {
+   margin-left: 20px;
+}
+
+form > div > * {
+   width: 70%;
+}
+
+label {
+   display: block;
+   margin-top: 1em;
+}
+
+.form {
+   background-color: var(--color6);
+}
+
+form button {
+   width: 75%;
+   margin: 30px;
+   color: var(--color6);
+   background-color: var(--color1);
 }
 
 .main-notices-featured {
@@ -166,6 +201,8 @@ nav {
    width: 25%;
 }
 
+
+
 /* FOOTER */
 
 .footer {
@@ -203,6 +240,14 @@ nav {
       flex-wrap: wrap;
    }
 
+   .center {
+      width: 100%;
+   }
+
+   .form {
+      width: 100%;
+   }
+
    .center-and-weather {
       display: flex;
    }
@@ -213,6 +258,7 @@ nav {
 
    .nav-bar-links {
       display: flex;
+      font-size: 1.4rem;
    }
 
    .hamburger-icon img {
@@ -225,10 +271,6 @@ nav {
    }
 
    .center-and-weather {
-      width: 100%;
-   }
-
-   .center {
       width: 100%;
    }
 
@@ -246,6 +288,7 @@ nav {
       justify-content: center;
    }
 
+
 }
 
 /* Computer screen code */
@@ -262,6 +305,16 @@ nav {
 
    .center {
       max-width: 800px;
+   }
+
+   form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+   }
+
+   form > div {
+      flex: 1 1 30%;
    }
 
    .weather {
