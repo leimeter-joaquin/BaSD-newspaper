@@ -116,15 +116,18 @@ nav {
    justify-content: center;
    background-color: var(--color6);
 }
-
+/* FORM */
 form {
-   width: 100%;
-   height: 100%;
-   font-size: 1.5rem;
+   font-size: 1.3rem;
 }
 
 form > div {
-   margin-left: 20px;
+   /* margin-left: 20px; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+   min-height: 500px;
 }
 
 form > div > * {
@@ -133,7 +136,7 @@ form > div > * {
 
 label {
    display: block;
-   margin-top: 1em;
+   margin: 0.2em 0em 0.4em;
 }
 
 .form {
@@ -146,6 +149,29 @@ form button {
    color: var(--color6);
    background-color: var(--color1);
 }
+
+.error-message {
+   display: block;
+   padding: 4px;
+   margin-top: 3px;
+   font-size: 0.5rem;
+   color: red;
+   max-width: 70%;
+}
+
+.showing-error {
+   border: 2px solid red;
+   border-radius: 3px;
+}
+
+.hidden {
+   visibility: hidden;
+}
+
+.visible {
+   display: block;
+}
+/* FORM END */
 
 .main-notices-featured {
    margin: 15px 50px;
@@ -306,7 +332,7 @@ form button {
    .center {
       max-width: 800px;
    }
-
+  /*FORM  */
    form {
       display: flex;
       flex-wrap: wrap;
@@ -314,9 +340,9 @@ form button {
    }
 
    form > div {
-      flex: 1 1 30%;
+      flex: 1 1 50%;
    }
-
+   /* FORM END */
    .weather {
       max-width: 230px;
    } 
