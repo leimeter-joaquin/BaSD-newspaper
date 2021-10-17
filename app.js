@@ -11,42 +11,71 @@ window.onload = function () {
    // 9 postcode
    // 10 id
    var errorMessages = document.getElementsByClassName('error-message');
+   //console.log(errorMessages);
 
-   //ALL INPUTS i think I could get all inputs as an array as well. but I am not sure and I already started
+   //ALL INPUTS
    var nameInput = document.getElementById('name');
    var emailInput = document.getElementById('email');
    var passwordInput = document.getElementById('password');
    var confirmPasswordInput = document.getElementById('confirm-password');
    var ageInput = document.getElementById('age');
    var phoneInput = document.getElementById('phone');
-   var adressInput = document.getElementById('city');
+   var adressInput = document.getElementById('adress');
+   var cityInput = document.getElementById('city');
    var postalCodeInput = document.getElementById('postal-code');
    var idInput = document.getElementById('id');
-   
+
+   //ALL INPUTS AS AN ARRAY
+   var inputList = [
+      nameInput,
+      emailInput,
+      passwordInput,
+      confirmPasswordInput,
+      ageInput,
+      phoneInput,
+      adressInput,
+      cityInput,
+      postalCodeInput,
+      idInput
+   ]
+
    //REGULAR EXPRESSIONS
-   var noNumbers = /\d/; //noNumbers.test(value) if there are numbers = true
-   var noSpaces = /\s/; //noSpaces.test(value) if there is a space = true
+   var hasNumbers = /\d/; //hasNumbers.test(value) if there are numbers = true
+   var hasSpaces = /\s/; //hasSpaces.test(value) if there is a space = true
+   var hasLetters = /\D/;
    var hasAt = /@/;
    var hasDotCom = /.com/;
-   var hasSymbol =  /\W/;;
-   var noSpacesDashesParenthesis = /([)( -])/; //  /([)( -])\w+/
+   var hasAlphanumChar = /\w/;
+   var hasSymbol =  /\W/;
+   var hasSpacesDashesParenthesis = /([)( -])/;
+
+   // for (let i = 0; i < 9; i++) {
+   //    var span = errorMessages[i];
+   // }
    
-   //SHOW OR HIDE ERROR FUNCTIONS
-   function showError(typeOfInput, indexOfSpan) {
-      errorMessages[indexOfSpan].classList.remove('hidden');
-      typeOfInput.classList.add('showing-error');
+   for (var i = 0; i <= 9; i++) {
+		const span = errorMessages[i];
+		inputList[i].onfocus = function() {
+			span.style.visibility = 'hidden';
+		}
+	}
+
+   //SHOW and HIDE ERROR
+   function showError(input, index) {
+      errorMessages[index].style.visibility = 'visible';
+      input.style.border= '2px solid red';
    }
-   function hideError(typeOfInput, indexOfSpan) {
-      errorMessages[indexOfSpan].classList.add('hidden');
-      typeOfInput.classList.remove('showing-error');
+   function hideError(input, index) {
+      errorMessages[index].style.visibility = 'hidden';
+      input.style.border= '2px solid green';
    }
 
    //nameInput
    function checkName() {
       if (
-         noNumbers.test(nameInput.value) === true || 
+         hasNumbers.test(nameInput.value) === true || 
          nameInput.value.length < 7 || 
-         !(noSpaces.test(nameInput.value))
+         !(hasSpaces.test(nameInput.value))
          ) 
       {
          showError(nameInput, 0);
@@ -55,9 +84,7 @@ window.onload = function () {
       }
    }
    nameInput.addEventListener('blur', checkName);
-   nameInput.addEventListener('onfocus', hideError);
-
-
+  
    //emailInput
    function checkEmail() {
       if(hasAt.test(emailInput.value) == true && hasDotCom.test(emailInput.value)) {
@@ -68,7 +95,6 @@ window.onload = function () {
       }
    }
    emailInput.addEventListener('blur' , checkEmail);
-   emailInput.addEventListener('onfocus', hideError);
    
    //passwordlInput 
    function checkPassword() {
@@ -79,7 +105,6 @@ window.onload = function () {
       }
    }
    passwordInput.addEventListener('blur' , checkPassword);
-   passwordInput.addEventListener('onfocus', hideError);
 
    //confirmPasswordInput 
    function checkConfirmPassword() {
@@ -90,7 +115,6 @@ window.onload = function () {
       }
    }
    confirmPasswordInput.addEventListener('blur' , checkConfirmPassword);
-   confirmPasswordInput.addEventListener('onfocus', hideError);
 
     //ageInput 
     function checkAge() {
@@ -102,26 +126,62 @@ window.onload = function () {
       }
    }
    ageInput.addEventListener('blur' , checkAge);
-   ageInput.addEventListener('onfocus', hideError);
 
-   //ageInput 
+   //phoneInput 
    function checkPhone() {
-      console.log(noSpacesDashesParenthesis.test(phoneInput.value));
-      if(phoneInput.value >= 7 && !noSpacesDashesParenthesis.test(phoneInput.value)) {
+      if(phoneInput.value >= 7 && !hasSpacesDashesParenthesis.test(phoneInput.value)) {
          hideError(phoneInput, 5);
       } else {
          showError(phoneInput, 5);
       }
    }
    phoneInput.addEventListener('blur' , checkPhone);
-   phoneInput.addEventListener('onfocus', hideError);
-}
 
-// check with value
-//take valur
-//function that validates true or false
-// addeventlistener('evento', funcion () {
-//    if true algo
-//    else falso
-// });
-//quito hidden y agrego showingerror a input
+   //adressInput 
+   function checkAdress() {
+      console.log();
+      if(hasNumbers.test(adressInput.value) && 
+         hasSpaces.test(adressInput.value) && 
+         hasLetters.test(adressInput.value)
+         )
+      {
+         hideError(adressInput, 6);
+      } else {
+         showError(adressInput, 6);
+      }
+   }
+   adressInput.addEventListener('blur' , checkAdress);
+
+   //cityInput 
+   function checkCity() {
+      if(cityInput.value.length >= 3)
+      {
+         hideError(cityInput, 7);
+      } else {
+         showError(cityInput, 7);
+      }
+   }
+   cityInput.addEventListener('blur' , checkCity);
+
+   //post
+   function checkPostalCode() {
+      if(postalCodeInput.value.length >= 3)
+      {
+         hideError(postalCodeInput, 8);
+      } else {
+         showError(postalCodeInput, 8);
+      }
+   }
+   postalCodeInput.addEventListener('blur' , checkPostalCode);
+
+   //id
+   function checkId() {
+      if(idInput.value.length >=7 && idInput.value.length <= 8)
+      {
+         hideError(idInput, 9);
+      } else {
+         showError(idInput, 9);
+      }
+   }
+   idInput.addEventListener('blur' , checkId);
+}
