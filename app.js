@@ -215,7 +215,7 @@ window.onload = function () {
       for (let i = 0; i < flags.length; i++) {
          sum += flags[i];
       }
-      if(sum == 10) {
+      if(sum == 10) { //if all inputs are validated meaning the array is full of 1. we alert
          alert(
             'Your Information' + '\n' +
             'name: ' + event.target[0].value + '\n' +
@@ -227,20 +227,20 @@ window.onload = function () {
             'Post Code: ' + event.target[8].value + '\n' +
             'ID: ' + event.target[9].value + '\n'
          )
-      } else {
-         var errorPos= [];
+      } else { //if the sum is not 10 i look for the positions where there is no validation and save it in the array errorPos 
+         var errorPosMessage = [];
+         var errorPos = [];
          for (let i = 0; i < 10; i++) {
             if(flags[i] == 0){
-               
-
+               errorPos.push(i);
             }
-            
          }
+         //then I make another array with the error messages and show it on alert
+         for (let i = 0; i < errorPos.length; i++) {
+            errorPosMessage[i] = errorMessages[errorPos[i]].innerHTML;
+         }
+         alert(errorPosMessage.join('\n'))
       }
-      // console.log(event)
-      // console.log(event.target[0].value)
-      // var allInfoToShow = [];
-      console.log(flags)
    })
    
 }
