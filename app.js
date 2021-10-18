@@ -11,7 +11,6 @@ window.onload = function () {
    // 9 postcode
    // 10 id
    var errorMessages = document.getElementsByClassName('error-message');
-   //console.log(errorMessages);
 
    //ALL INPUTS
    var nameInput = document.getElementById('name');
@@ -39,21 +38,23 @@ window.onload = function () {
       idInput
    ]
 
+   //FLAGS ARRAY FOR BUTTON AT THE END
+   var flags = [];
+   //INITIALIZE THEM AT 0
+   for (let i = 0; i < 10; i++) {
+      flags[i] = 0;
+   }
+
    //REGULAR EXPRESSIONS
    var hasNumbers = /\d/; //hasNumbers.test(value) if there are numbers = true
    var hasSpaces = /\s/; //hasSpaces.test(value) if there is a space = true
    var hasLetters = /\D/;
    var hasAt = /@/;
    var hasDotCom = /.com/;
-   var hasAlphanumChar = /\w/;
    var hasSymbol =  /\W/;
    var hasSpacesDashesParenthesis = /([)( -])/;
 
-   // for (let i = 0; i < 9; i++) {
-   //    var span = errorMessages[i];
-   // }
-   
-   for (var i = 0; i <= 9; i++) {
+   for (var i = 0; i < 10; i++) {
 		const span = errorMessages[i];
 		inputList[i].onfocus = function() {
 			span.style.visibility = 'hidden';
@@ -62,43 +63,52 @@ window.onload = function () {
 
    //SHOW and HIDE ERROR
    function showError(input, index) {
-      errorMessages[index].style.visibility = 'visible';
+      errorMessages[index].style.visibility = 'visible'; //SHOW ERROR SPAN
       input.style.border= '2px solid red';
+      flags[index] = 0; //FLAG 0 MEANS ERROR OR EMPTY
    }
    function hideError(input, index) {
-      errorMessages[index].style.visibility = 'hidden';
+      errorMessages[index].style.visibility = 'hidden'; //HIDE ERROR SPAN
       input.style.border= '2px solid green';
+      flags[index] = 1; //FLAG 1 MEANS VALIDATED
    }
 
-   //nameInput
+   //nameInput //all 10 functions work the same way with different if statements
    function checkName() {
       if (
-         hasNumbers.test(nameInput.value) === true || 
-         nameInput.value.length < 7 || 
-         !(hasSpaces.test(nameInput.value))
+         !hasNumbers.test(nameInput.value) && 
+         nameInput.value.length > 7 && 
+         hasSpaces.test(nameInput.value)
          ) 
       {
-         showError(nameInput, 0);
-      } else {
          hideError(nameInput, 0);
+      } else {
+         showError(nameInput, 0);
       }
    }
    nameInput.addEventListener('blur', checkName);
-  
+
    //emailInput
    function checkEmail() {
-      if(hasAt.test(emailInput.value) == true && hasDotCom.test(emailInput.value)) {
-         console.log('nice mail bro');
+      if (
+         hasAt.test(emailInput.value) == true && 
+         hasDotCom.test(emailInput.value)
+         ) 
+      {
          hideError(emailInput, 1);
       } else {
          showError(emailInput, 1);
       }
    }
    emailInput.addEventListener('blur' , checkEmail);
-   
+
    //passwordlInput 
    function checkPassword() {
-      if(passwordInput.value.length > 7 && !(hasSymbol.test(passwordInput.value))) { 
+      if (
+         passwordInput.value.length > 7 && 
+         !(hasSymbol.test(passwordInput.value))
+         ) 
+      { 
          hideError(passwordInput, 2);
       } else {
          showError(passwordInput, 2);
@@ -108,7 +118,8 @@ window.onload = function () {
 
    //confirmPasswordInput 
    function checkConfirmPassword() {
-      if(confirmPasswordInput.value === passwordInput.value) {
+      if (confirmPasswordInput.value === passwordInput.value) 
+      {
          hideError(confirmPasswordInput, 3);
       } else {
          showError(confirmPasswordInput, 3);
@@ -116,10 +127,14 @@ window.onload = function () {
    }
    confirmPasswordInput.addEventListener('blur' , checkConfirmPassword);
 
-    //ageInput 
-    function checkAge() {
-      console.log(ageInput.value % 1 == 0) 
-      if(ageInput.value % 1 == 0 && ageInput.value >= 18) {
+   //ageInput 
+   function checkAge() {
+      if (
+         ageInput.value % 1 == 0 && 
+         ageInput.value >= 18 && 
+         ageInput.value < 150
+         ) 
+      {
          hideError(ageInput, 4);
       } else {
          showError(ageInput, 4);
@@ -129,7 +144,11 @@ window.onload = function () {
 
    //phoneInput 
    function checkPhone() {
-      if(phoneInput.value >= 7 && !hasSpacesDashesParenthesis.test(phoneInput.value)) {
+      if (
+         phoneInput.value.length >= 7 && 
+         !hasSpacesDashesParenthesis.test(phoneInput.value)
+         ) 
+      {
          hideError(phoneInput, 5);
       } else {
          showError(phoneInput, 5);
@@ -139,8 +158,8 @@ window.onload = function () {
 
    //adressInput 
    function checkAdress() {
-      console.log();
-      if(hasNumbers.test(adressInput.value) && 
+      if (
+         hasNumbers.test(adressInput.value) && 
          hasSpaces.test(adressInput.value) && 
          hasLetters.test(adressInput.value)
          )
@@ -176,7 +195,10 @@ window.onload = function () {
 
    //id
    function checkId() {
-      if(idInput.value.length >=7 && idInput.value.length <= 8)
+      if (
+         idInput.value.length >=7 && 
+         idInput.value.length <= 8
+         )
       {
          hideError(idInput, 9);
       } else {
@@ -184,4 +206,46 @@ window.onload = function () {
       }
    }
    idInput.addEventListener('blur' , checkId);
+
+   //BUTTON
+   var form = document.getElementById('form')
+   form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      var sum = 0;
+      for (let i = 0; i < flags.length; i++) {
+         sum += flags[i];
+      }
+      if(sum == 10) {
+         alert(
+            'Your Information' + '\n' +
+            'name: ' + event.target[0].value + '\n' +
+            'email: ' + event.target[1].value + '\n' +
+            'Age: ' + event.target[4].value + '\n' +
+            'Phone: ' + event.target[5].value + '\n' +
+            'Adress: ' + event.target[6].value + '\n' +
+            'City: ' + event.target[7].value + '\n' +
+            'Post Code: ' + event.target[8].value + '\n' +
+            'ID: ' + event.target[9].value + '\n'
+         )
+      } else {
+         var errorPos= [];
+         for (let i = 0; i < 10; i++) {
+            if(flags[i] == 0){
+               
+
+            }
+            
+         }
+      }
+      // console.log(event)
+      // console.log(event.target[0].value)
+      // var allInfoToShow = [];
+      console.log(flags)
+   })
+   
+}
+//AUTO NAME
+function getName(event) {
+   var nameSpan = document.getElementById('nameh2');
+   nameSpan.innerText = event.target.value;
 }

@@ -70,16 +70,17 @@
             DNI: Número de 7 u 8 dígitos. -->
             <!-- center content -->
             <div class="form padding margin">
-               <form><!--action="results.html" method = "GET"-->
+               <h2>Hola: <span id="nameh2"></span></h2>
+               <form id="form">
                   <div class="form-left">
                      <div>
-                        <label for='name'>Name</label>
-                        <input type= 'text' id='name' placeholder='hola adios'>
+                        <label for='name'>Full Name</label>
+                        <input type= 'text' id='name' placeholder='Gerardo Plantabuena' onkeyup="getName(event)">
                         <span class="hidden error-message">Error, please input a name with more than 6 letters and a space</span>
                      </div>
                      <div>
                         <label for='email'>E-mail</label>
-                        <input type='email' id='email'>
+                        <input type='email' id='email' placeholder='GP@gimeil.com'>
                         <span class="hidden error-message">Error, please enter a valid email</span>
                      </div>
                      <div>
@@ -102,22 +103,22 @@
                   <div class="form-right">
                      <div>
                         <label for='phone'>Phone</label>
-                        <input type='' id='phone'>
+                        <input type='' id='phone' placeholder='0266443895'>
                         <span class="hidden error-message">needs more than 7 digits no dash, parenthesis or spaces</span>
                      </div>
                      <div>
                         <label for='adress'>Adress</label>
-                        <input type='' id='adress'>
-                        <span class="hidden error-message">at least 5 characters qith letters, numbers and a space</span>
+                        <input type='' id='adress' placeholder='La general 22'>
+                        <span class="hidden error-message">at least 5 characters with letters, numbers and a space</span>
                      </div>
                      <div>
                         <label for='city'>City</label>
-                        <input type='' id='city'>
+                        <input type='' id='city' placeholder='Alto Pelado'>
                         <span class="hidden error-message">more than 3 characters</span>
                      </div>
                      <div>
                         <label for='postal-code'>Postal Code</label>
-                        <input type='' id='postal-code'>
+                        <input type='' id='postal-code'  placeholder='5721'>
                         <span class="hidden error-message">more than 3 characters</span>
                      </div>
                      <div>
@@ -127,7 +128,7 @@
                      </div>
                   </div>
 
-                  <button type="button" id="button" class="darkButton">Send</button>
+                  <button type="submit" id="button" class="darkButton">Send</button>
                </form>
             </div>
 
