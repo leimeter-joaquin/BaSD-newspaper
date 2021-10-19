@@ -1,5 +1,5 @@
 window.onload = function () {
-   // ERROR MESSAGES span string
+   // ERROR MESSAGES span array
    // 1 name
    // 2 email
    // 3 pass
@@ -24,7 +24,7 @@ window.onload = function () {
    var postalCodeInput = document.getElementById('postal-code');
    var idInput = document.getElementById('id');
 
-   //ALL INPUTS AS AN ARRAY
+   //ALL INPUTS AS AN ARRAY //could I have done this before with .getElementByClassName or Name?
    var inputList = [
       nameInput,
       emailInput,
@@ -40,20 +40,21 @@ window.onload = function () {
 
    //FLAGS ARRAY FOR BUTTON AT THE END
    var flags = [];
-   //INITIALIZE THEM AT 0
+   //INITIALIZE. A 0 means there is no input value or that the validation is not passed
    for (let i = 0; i < 10; i++) {
       flags[i] = 0;
    }
 
    //REGULAR EXPRESSIONS
    var hasNumbers = /\d/; //hasNumbers.test(value) if there are numbers = true
-   var hasSpaces = /\s/; //hasSpaces.test(value) if there is a space = true
+   var hasSpaces = /\s/;
    var hasLetters = /\D/;
    var hasAt = /@/;
    var hasDotCom = /.com/;
    var hasSymbol =  /\W/;
    var hasSpacesDashesParenthesis = /([)( -])/;
 
+   //ASSIGN ONFOCUS TO ALL INPUTS
    for (var i = 0; i < 10; i++) {
 		const span = errorMessages[i];
 		inputList[i].onfocus = function() {
@@ -79,7 +80,7 @@ window.onload = function () {
          !hasNumbers.test(nameInput.value) && 
          nameInput.value.length > 7 && 
          hasSpaces.test(nameInput.value)
-         ) 
+         )
       {
          hideError(nameInput, 0);
       } else {
@@ -215,7 +216,8 @@ window.onload = function () {
       for (let i = 0; i < flags.length; i++) {
          sum += flags[i];
       }
-      if(sum == 10) { //if all inputs are validated meaning the array is full of 1. we alert
+      //if all inputs are validated meaning the array is full of 1. we alert
+      if(sum === 10) { 
          alert(
             'Your Information' + '\n' +
             'name: ' + event.target[0].value + '\n' +
@@ -228,21 +230,21 @@ window.onload = function () {
             'ID: ' + event.target[9].value + '\n'
          )
       } else { //if the sum is not 10 i look for the positions where there is no validation and save it in the array errorPos 
-         var errorPosMessage = [];
          var errorPos = [];
          for (let i = 0; i < 10; i++) {
-            if(flags[i] == 0){
+            if(flags[i] == 0)
+            {
                errorPos.push(i);
             }
          }
          //then I make another array with the error messages and show it on alert
+         var errorPosMessage = [];
          for (let i = 0; i < errorPos.length; i++) {
             errorPosMessage[i] = errorMessages[errorPos[i]].innerHTML;
          }
-         alert(errorPosMessage.join('\n'))
+         alert(errorPosMessage.join('\n'));
       }
    })
-   
 }
 //AUTO NAME
 function getName(event) {
