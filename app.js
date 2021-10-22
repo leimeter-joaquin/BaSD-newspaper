@@ -39,6 +39,7 @@ window.onload = function () {
    ]
 
 
+
    //FLAGS ARRAY FOR BUTTON AT THE END
    var flags = [];
    //INITIALIZE. A 0 means there is no input value or that the validation is not passed
@@ -73,6 +74,10 @@ window.onload = function () {
       errorMessages[index].style.visibility = 'hidden'; //HIDE ERROR SPAN
       input.style.border= '2px solid green';
       flags[index] = 1; //FLAG 1 MEANS VALIDATED
+   }
+
+   var showSuccessfulFetch = () => {
+
    }
 
    //nameInput //all 10 functions work the same way with different if statements
@@ -209,6 +214,13 @@ window.onload = function () {
    }
    idInput.addEventListener('blur' , checkId);
 
+   //
+   var string = 'hola hola hola hola hola';
+   console.log(string);
+   var newString = string.replace(/\s/g, '%20');
+   console.log(string.replace(' ', '%20'));
+   console.log(newString);
+
    //BUTTON
    var form = document.getElementById('form')
    form.addEventListener('submit', function(event) {
@@ -218,19 +230,43 @@ window.onload = function () {
       for (let i = 0; i < flags.length; i++) {
          sum += flags[i];
       }
-      //if all inputs are validated meaning the array is full of 1. we alert
+
+      //if all inputs are validated meaning the array is full of 1
       if(sum === 10) { 
-         alert(
-            'Your Information' + '\n' +
-            'name: ' + event.target[0].value + '\n' +
-            'email: ' + event.target[1].value + '\n' +
-            'Age: ' + event.target[4].value + '\n' +
-            'Phone: ' + event.target[5].value + '\n' +
-            'Adress: ' + event.target[6].value + '\n' +
-            'City: ' + event.target[7].value + '\n' +
-            'Post Code: ' + event.target[8].value + '\n' +
-            'ID: ' + event.target[9].value + '\n'
-         )
+
+         // alert(
+         //    'Your Information' + '\n' +
+         //    'name: ' + event.target[0].value + '\n' +
+         //    'email: ' + event.target[1].value + '\n' +
+         //    'Age: ' + event.target[4].value + '\n' +
+         //    'Phone: ' + event.target[5].value + '\n' +
+         //    'Adress: ' + event.target[6].value + '\n' +
+         //    'City: ' + event.target[7].value + '\n' +
+         //    'Post Code: ' + event.target[8].value + '\n' +
+         //    'ID: ' + event.target[9].value + '\n'
+         // )
+
+         //set up the url to send parameters
+         url = 'https://curso-dev-2021.herokuapp.com/newsletter';
+         informationToSend = '?'; 
+         //create the fullparameter list
+         for (let i = 0; i < inputList.length; i++) {
+            informationToSend += inputList[i].id + '=' + inputList[i].value + '&';
+         }
+         //replace spaces with %20
+         var noSpacesInformationToSend = informationToSend.replace(/\s/g, '%20');
+
+         url = 'https://curso-dev-2021.herokuapp.com/newsletter';
+         fullUrl = url + noSpacesInformationToSend;
+         console.log(fullUrl);
+
+         fetch(fullUrl)
+            .then(res => res.json())
+            .then(data => showSuccessfulFetch())
+            .catch()//WORK IN PROGRESS FIRST Ill MAKE THE BUTTON DISSAPEAR WITH CLICK
+      
+         
+
       } else { //if the sum is not 10 i look for the positions where there is no validation and save it in the array errorPos 
          var errorPos = [];
          for (let i = 0; i < 10; i++) {
@@ -247,6 +283,14 @@ window.onload = function () {
          alert(errorPosMessage.join('\n'));
       }
    })
+
+   //MODAL
+   //get modal elements
+   var modalContent = document.getElementById('modal__content');
+   var modal = document.getElementById('modal');
+   //add events t close the modal window
+   document.getElementById('modal__close').addEventListener('click', () => modal.style.display = 'none')
+   document.getElementById('modal__button').addEventListener('click', () => modal.style.display = 'none')
 }
 //AUTO NAME
 function getName(event) {
