@@ -38,6 +38,7 @@ window.onload = function () {
       idInput
    ]
 
+
    //FLAGS ARRAY FOR BUTTON AT THE END
    var flags = [];
    //INITIALIZE. A 0 means there is no input value or that the validation is not passed
@@ -211,6 +212,7 @@ window.onload = function () {
    //BUTTON
    var form = document.getElementById('form')
    form.addEventListener('submit', function(event) {
+      console.log(form);
       event.preventDefault();
       var sum = 0;
       for (let i = 0; i < flags.length; i++) {
