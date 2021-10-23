@@ -1,3 +1,4 @@
+
 window.onload = function () {
    // ERROR MESSAGES span array
    // 1 name
@@ -37,18 +38,18 @@ window.onload = function () {
       postalCodeInput,
       idInput
    ]
-
-
+   console.log(inputList)
 
    //FLAGS ARRAY FOR BUTTON AT THE END
    var flags = [];
+
    //INITIALIZE. A 0 means there is no input value or that the validation is not passed
    for (let i = 0; i < 10; i++) {
       flags[i] = 0;
    }
 
    //REGULAR EXPRESSIONS
-   var hasNumbers = /\d/; //hasNumbers.test(value) if there are numbers = true
+   var hasNumbers = /\d/;
    var hasSpaces = /\s/;
    var hasLetters = /\D/;
    var hasAt = /@/;
@@ -64,7 +65,7 @@ window.onload = function () {
 		}
 	}
 
-   //SHOW and HIDE ERROR
+   //FUNCTIONS TO SHOW ERRORS AND SUCCESSES
    function showError(input, index) {
       errorMessages[index].style.visibility = 'visible'; //SHOW ERROR SPAN
       input.style.border= '2px solid red';
@@ -74,10 +75,6 @@ window.onload = function () {
       errorMessages[index].style.visibility = 'hidden'; //HIDE ERROR SPAN
       input.style.border= '2px solid green';
       flags[index] = 1; //FLAG 1 MEANS VALIDATED
-   }
-
-   var showSuccessfulFetch = () => {
-
    }
 
    //nameInput //all 10 functions work the same way with different if statements
@@ -203,7 +200,7 @@ window.onload = function () {
    //id
    function checkId() {
       if (
-         idInput.value.length >=7 && 
+         idInput.value.length >= 7 && 
          idInput.value.length <= 8
          )
       {
@@ -214,86 +211,91 @@ window.onload = function () {
    }
    idInput.addEventListener('blur' , checkId);
 
-   //
-   var string = 'hola hola hola hola hola';
-   console.log(string);
-   var newString = string.replace(/\s/g, '%20');
-   console.log(string.replace(' ', '%20'));
-   console.log(newString);
-
    //BUTTON
    var form = document.getElementById('form')
    form.addEventListener('submit', function(event) {
-      console.log(form);
       event.preventDefault();
+
+      //VALIDATION
       var sum = 0;
       for (let i = 0; i < flags.length; i++) {
          sum += flags[i];
       }
-
-      //if all inputs are validated meaning the array is full of 1
       if(sum === 10) { 
-
-         // alert(
-         //    'Your Information' + '\n' +
-         //    'name: ' + event.target[0].value + '\n' +
-         //    'email: ' + event.target[1].value + '\n' +
-         //    'Age: ' + event.target[4].value + '\n' +
-         //    'Phone: ' + event.target[5].value + '\n' +
-         //    'Adress: ' + event.target[6].value + '\n' +
-         //    'City: ' + event.target[7].value + '\n' +
-         //    'Post Code: ' + event.target[8].value + '\n' +
-         //    'ID: ' + event.target[9].value + '\n'
-         // )
-
          //set up the url to send parameters
          url = 'https://curso-dev-2021.herokuapp.com/newsletter';
          informationToSend = '?'; 
+         
          //create the fullparameter list
          for (let i = 0; i < inputList.length; i++) {
-            informationToSend += inputList[i].id + '=' + inputList[i].value + '&';
+            informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
          }
+
          //replace spaces with %20
          var noSpacesInformationToSend = informationToSend.replace(/\s/g, '%20');
 
-         url = 'https://curso-dev-2021.herokuapp.com/newsletter';
+         //complete url
          fullUrl = url + noSpacesInformationToSend;
-         console.log(fullUrl);
 
          fetch(fullUrl)
             .then(res => res.json())
-            .then(data => showSuccessfulFetch())
-            .catch()//WORK IN PROGRESS FIRST Ill MAKE THE BUTTON DISSAPEAR WITH CLICK
-      
-         
-
-      } else { //if the sum is not 10 i look for the positions where there is no validation and save it in the array errorPos 
-         var errorPos = [];
-         for (let i = 0; i < 10; i++) {
-            if(flags[i] == 0)
-            {
-               errorPos.push(i);
-            }
-         }
-         //then I make another array with the error messages and show it on alert
-         var errorPosMessage = [];
-         for (let i = 0; i < errorPos.length; i++) {
-            errorPosMessage[i] = errorMessages[errorPos[i]].innerHTML;
-         }
-         alert(errorPosMessage.join('\n'));
-      }
+            .then((data) => showSuccessfulFetch(data))
+            .catch((error) => showErrorFetch(error))
+      } else { showErrorValidation(); }
    })
+
+   //FETCH FUNCTIONS
+   var showSuccessfulFetch = (data) => {
+      //show modal window
+      modal.style.display = 'flex';
+      console.log(data[`postal-code`]);
+      modalTitle.innerHTML = "Successfull Register!!";
+      for (const property in data) {
+         console.log(data[property]);
+         modalContent.innerHTML += `<li>${data[property]}</li>`
+      }
+      
+      //saving data on local Storage
+      for (const property in data) {
+         localStorage.setItem(property, data[property])
+      }
+
+   }  
+
+   var showErrorFetch = (err) => {
+      modal.style.display = 'flex';
+      modalContent.innerHTML = err;
+   }
+
+   var showErrorValidation = () => {
+      modal.style.display = 'flex';
+      modalContent.innerHTML = 'validation not passed';
+   }
 
    //MODAL
    //get modal elements
+   var modalTitle = document.getElementById('modal__title');
    var modalContent = document.getElementById('modal__content');
    var modal = document.getElementById('modal');
-   //add events t close the modal window
+   //add events to close the modal window
    document.getElementById('modal__close').addEventListener('click', () => modal.style.display = 'none')
    document.getElementById('modal__button').addEventListener('click', () => modal.style.display = 'none')
+
+   //LOCAL STORAGE
+   //checking local storage 
+   for (let i = 0; i < inputList.length; i++) {
+      if(localStorage.getItem(inputList[i].id) !== null) {
+         //filling inputs
+         inputList[i].value = localStorage.getItem(inputList[i].id);
+         inputList[i].dispatchEvent(new Event('blur'));
+      }
+   }
 }
+
 //AUTO NAME
 function getName(event) {
    var nameSpan = document.getElementById('nameh2');
    nameSpan.innerText = event.target.value;
 }
+
+ 
