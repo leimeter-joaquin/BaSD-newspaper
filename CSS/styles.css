@@ -1,5 +1,5 @@
 :root {
-   --color1: #193751;
+   --color1: #131313;
    --color2: #1b2f46;
    --color3: #516e79;
    --color4: #ced3da;
@@ -48,8 +48,20 @@ header {
    align-items: center;
    min-height: 100px;
    background-color: var(--color1);
+   background-size: 100%;
 }
 
+#flex-news {
+   background-color: #ff8177;
+  background-image: linear-gradient(to top, var(--color6) 0%,var(--color4) 80%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  font-size: 2rem;
+  padding-left: 1rem;
+}
 .hamburger-icon img {
    max-width: 100px;
 }
@@ -60,7 +72,7 @@ header {
    color: var(--color5);
 }
 
-.header-left img {
+.header-right img {
    width: 100px;
    margin: 10px;
 }
@@ -93,10 +105,6 @@ nav {
    /*These flex properties are here because later I apply display:flex;*/
    flex-basis: 100%;
    justify-content: space-around;
-}
-
-.nav-bar-links a:hover {
-   text-decoration: underline;
 }
 
 /* MAIN CONTENT (CENTER) AND SIDEBARS AND FORM*/
@@ -238,7 +246,7 @@ form button {
 /* FOOTER */
 
 .footer {
-   background-color: #272c3a;
+   background-color: var(--color1);
    font-size: 15px;
    text-align: center;
 }
@@ -251,6 +259,12 @@ form button {
    display: flex;
    justify-content: space-around;
    padding: 20px 0px;
+}
+
+.footer-links a:hover {
+   color: var(--redish);
+   text-decoration: none;
+   transition: all 0.3s ease;
 }
 
 .copyright {
@@ -329,7 +343,11 @@ form button {
 /* Tablet screen code */
 
 @media only screen and (min-width: 600px) {
-   
+
+   header {
+      justify-content: space-around;
+   }
+
    a {
       line-height: 100%;
    }
@@ -354,12 +372,19 @@ form button {
    }
 
    nav {
-      padding: 20px;
+      padding: 15px;
    }
 
    .nav-bar-links {
       display: flex;
       font-size: 1.4rem;
+      text-decoration: none;
+   }
+
+   .nav-bar-links a:hover{
+      color: var(--redish);
+      text-decoration: none;
+      transition: all 0.3s ease;
    }
 
    .hamburger-icon img {

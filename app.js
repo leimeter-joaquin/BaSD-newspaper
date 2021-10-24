@@ -213,42 +213,42 @@ window.onload = function () {
 
    //BUTTON
    var form = document.getElementById('form')
-   form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      //VALIDATION
-      var sum = 0;
-      for (let i = 0; i < flags.length; i++) {
-         sum += flags[i];
-      }
-      if(sum === 10) { 
-         //set up the url to send parameters
-         url = 'https://curso-dev-2021.herokuapp.com/newsletter';
-         informationToSend = '?'; 
-         
-         //create the fullparameter list
-         for (let i = 0; i < inputList.length; i++) {
-            informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
+   form.addEventListener('submit', 
+      function(event) {
+         event.preventDefault();
+         //VALIDATION
+         var sum = 0;
+         for (let i = 0; i < flags.length; i++) {
+            sum += flags[i];
          }
+         if(sum === 10) { 
+            //set up the url to send parameters
+            url = 'https://curso-dev-2021.herokuapp.com/newsletter';
+            informationToSend = '?'; 
+            
+            //create the fullparameter list
+            for (let i = 0; i < inputList.length; i++) {
+               informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
+            }
 
-         //replace spaces with %20
-         var noSpacesInformationToSend = informationToSend.replace(/\s/g, '%20');
+            //replace spaces with %20
+            var noSpacesInformationToSend = informationToSend.replace(/\s/g, '%20');
 
-         //complete url
-         fullUrl = url + noSpacesInformationToSend;
+            //complete url
+            fullUrl = url + noSpacesInformationToSend;
 
-         fetch(fullUrl)
-            .then(res => res.json())
-            .then((data) => showSuccessfulFetch(data))
-            .catch((error) => showErrorFetch(error))
-      } else { showErrorValidation(); }
+            fetch(fullUrl)
+               .then(res => res.json())
+               .then((data) => showSuccessfulFetch(data))
+               .catch((error) => showErrorFetch(error))
+
+         } else { showErrorValidation(); }
    })
 
    //FETCH FUNCTIONS
    var showSuccessfulFetch = (data) => {
       //show modal window
       modal.style.display = 'flex';
-      console.log(data[`postal-code`]);
       modalTitle.innerHTML = "Successfull Register!!";
       for (const property in data) {
          console.log(data[property]);
@@ -259,7 +259,6 @@ window.onload = function () {
       for (const property in data) {
          localStorage.setItem(property, data[property])
       }
-
    }  
 
    var showErrorFetch = (err) => {
@@ -278,8 +277,13 @@ window.onload = function () {
    var modalContent = document.getElementById('modal__content');
    var modal = document.getElementById('modal');
    //add events to close the modal window
-   document.getElementById('modal__close').addEventListener('click', () => modal.style.display = 'none')
-   document.getElementById('modal__button').addEventListener('click', () => modal.style.display = 'none')
+   document.getElementById('modal__close').addEventListener('click', () => clearModal())
+   document.getElementById('modal__button').addEventListener('click', () => clearModal())
+   //function that clears modalContent and closes it
+   var clearModal = () => {
+      modal.style.display = 'none';
+      modalContent.innerHTML = '';
+   }
 
    //LOCAL STORAGE
    //checking local storage 
