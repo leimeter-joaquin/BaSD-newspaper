@@ -8,7 +8,7 @@
    --redish:#f28b83;
    --greensih:#5bc8a1;
    --yellowish:#fff177;
- }
+}
  
 
 /* MOBILE FIRST DESIGN*/
@@ -142,7 +142,10 @@ h2 {
 /* FORM */
 
 form {
-   font-size: 1.3rem;
+   font-size: 1.5rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 form > div {
@@ -155,9 +158,12 @@ form > div {
 }
 
 form > div > * {
-   width: 70%;
    min-height: 100px;
    max-height: 150px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
 }
 
 label {
@@ -170,11 +176,22 @@ label {
 }
 
 form button {
-   width: 75%;
-   margin: 30px;
+   border: none;
+   outline: none;
+   border-radius: 4px;
+   width: 80%;
+   height: 50px;
+   margin: 20px 0px;
    color: var(--color6);
    background-color: var(--color1);
 }
+
+form button:hover {
+   color: var(--color1);
+   background-color: var(--greensih);
+   transition: all 0.5s ease;
+}
+
 
 .error-message {
    display: block;
@@ -237,6 +254,11 @@ form button {
    text-align: center;
 }
 
+.weather img {
+   height: 200px;
+   margin-top: 20px;
+}
+
 .center-and-weather {
    width: 100%;
    align-items: flex-start
@@ -248,7 +270,8 @@ form button {
 }
 
 .social img {
-   width: 25%;
+   margin-top: 20px;
+   height: 200px;
 }
 
 /* FOOTER */
@@ -308,26 +331,22 @@ form button {
 }
 
 #modal__top {
-    display: flex;
-    align-items: center;
-    background: var(--color4);
-    /* justify-content: space-between; */
+   display: flex;
+   align-items: center;
+   background: var(--color4);
+   min-height: 75px;
+}
+
+#modal__top:hover {
+   background-color: var(--yellowish);
+   transition: all 0.7s ease-out;
 }
 
 #modal__title {
    flex-grow: 1;
-   padding: 0 var(--gap);
-   font-size: 40px;
-}
-
-#modal__close {
-   display: flex;
-   align-items: center;
-   cursor: pointer;
-   padding: var(--gap);
-   background: none;
-   border: none;
-   outline: none;
+   padding: 5px var(--gap);
+   font-size: 2rem;
+   text-align: center;
 }
 
 #modal__content {
@@ -335,19 +354,38 @@ form button {
    font-size: 10px;
 }
 
+#modal__content li {
+   line-height: 1.5;
+   list-style-type: none;
+   font-size: 1.5rem;
+}
+
+#modal__content li:hover {
+   background-color: var(--redish);
+   transition: all 0.7s ease;
+}
+
 #modal__bottom {
-   text-align: right;
+   text-align: center;
 }
 
 #modal__button {
-   padding: var(--gap);
-   margin: var(--gap);
-   min-width: 150px;
+   min-width: 100%;
+   min-height: 75px;
    cursor: pointer;
    border: none;
    outline: none;
-   border-radius: 4px;
+   background-color: var(--color1);
+   color: var(--color6);
 }
+#modal__button:hover {
+   color: var(--color1);
+   background-color: var(--greensih);
+   transition: all 0.35s ease-in;
+
+}
+
+
 /* Tablet screen code */
 
 @media only screen and (min-width: 600px) {
@@ -384,7 +422,7 @@ form button {
    }
 
    nav {
-      padding: 15px 150px;
+      padding: 15px 50px;
    }
 
    .nav-bar-links {
@@ -417,8 +455,7 @@ form button {
    }
 
    .social img {
-      width: 100px;
-      height: 100px;
+      height: 200px;
    }
 
    .follow-icons {
@@ -447,9 +484,14 @@ form button {
       border-right: 5px solid black;
       padding: 0px 30px;
    }
+   nav {
+      padding: 15px 150px;
+   }
+
   /*FORM  */
    form {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
    }

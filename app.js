@@ -137,7 +137,7 @@ window.onload = function () {
          ageInput.value % 1 == 0 && 
          ageInput.value >= 18 && 
          ageInput.value < 150
-         ) 
+         )
       {
          hideError(ageInput, 4);
       } else {
@@ -248,10 +248,10 @@ window.onload = function () {
    var showSuccessfulFetch = (data) => {
       //show modal window
       modal.style.display = 'flex';
-      modalTitle.innerHTML = "Successfull Register!!";
+      modalTitle.innerHTML = "Successful Register!!";
       for (const property in data) {
          console.log(data[property]);
-         modalContent.innerHTML += `<li>${data[property]}</li>`
+         modalContent.innerHTML += `<li>${property}: ${data[property]}</li>`
       }
       
       //saving data on local Storage
@@ -278,7 +278,6 @@ window.onload = function () {
    var modalContent = document.getElementById('modal__content');
    var modal = document.getElementById('modal');
    //add events to close the modal window
-   document.getElementById('modal__close').addEventListener('click', () => clearModal())
    document.getElementById('modal__button').addEventListener('click', () => clearModal())
    //function that clears modalContent and closes it
    var clearModal = () => {
@@ -302,5 +301,3 @@ function getName(event) {
    var nameSpan = document.getElementById('nameh2');
    nameSpan.innerText = event.target.value;
 }
-
- 
