@@ -26,6 +26,10 @@ a {
    text-decoration: none;
 }
 
+h3 {
+   min-height: 50px;
+}
+
 .padding {
    padding: 5px;
 }
@@ -484,6 +488,7 @@ form button:hover {
       border-right: 5px solid black;
       padding: 0px 30px;
    }
+
    nav {
       padding: 15px 150px;
    }
@@ -517,7 +522,7 @@ form button:hover {
    }
    
    .social img {
-      height: 100px;
+      height: 200px;
       padding-top: 10px;
    }
 
