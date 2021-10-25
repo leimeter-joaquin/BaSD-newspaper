@@ -25,5 +25,5 @@ The form must be responsive and it has to validate all inputs following cetain r
 ## To visualize
 Open index.html or subscription.html on any browser. You can navigate between the two clicking on "home" and "subscription"
 
-GitHub Pages: https://leimeterjoaquin.github.io/part-2/
-Repository: https://github.com/leimeterjoaquin/part-2
+GitHub Pages: https://leimeterjoaquin.github.io/BaSD-newspaper/
+Repository: https://github.com/leimeterjoaquin/BaSD-newspaper

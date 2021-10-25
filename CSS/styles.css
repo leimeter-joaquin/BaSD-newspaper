@@ -14,7 +14,9 @@
 /* MOBILE FIRST DESIGN*/
 
 body {
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
    font-size: 30px;
 }
 
@@ -35,7 +37,7 @@ a {
 .container {
    display: flex;
    flex-direction: column;
-   background-color: var(--color4);
+   background-color: var(--color6);
    color: var(--color6);
 }
 
@@ -52,16 +54,17 @@ header {
 }
 
 #flex-news {
-   background-color: #ff8177;
-  background-image: linear-gradient(to top, var(--color6) 0%,var(--color4) 80%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-  font-size: 2rem;
-  padding-left: 1rem;
+   /* background-color: #ff8177; */
+   background-image: linear-gradient(to top, var(--color6) 0%,var(--color4) 80%);
+   background-size: 100%;
+   -webkit-background-clip: text;
+   -moz-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -moz-text-fill-color: transparent;
+   font-size: 2rem;
+   padding-left: 1rem;
 }
+
 .hamburger-icon img {
    max-width: 100px;
 }
@@ -97,7 +100,8 @@ nav {
    justify-content: flex-start;
    align-items: center;
    margin-top: 3px;
-   background-color: var(--color1);
+   background-color: var(--greensih);
+   /* background-image: linear-gradient(to top, var(--greensih) 0%,var(--color1) 150%); */
 }
 
 .nav-bar-links {
@@ -115,6 +119,7 @@ nav {
    align-items: center;
    color: var(--color1);
    background-color: var(--color 3);
+
 }
 
 .main a {
@@ -126,12 +131,16 @@ nav {
    flex-direction: column;
    justify-content: center;
    background-color: var(--color6);
+   /* background-color: rgb(200, 158, 158); */
 }
+
 h2 {
    text-align: center;
    padding: 10px ;
 }
+
 /* FORM */
+
 form {
    font-size: 1.3rem;
 }
@@ -147,6 +156,8 @@ form > div {
 
 form > div > * {
    width: 70%;
+   min-height: 100px;
+   max-height: 150px;
 }
 
 label {
@@ -170,7 +181,6 @@ form button {
    margin-top: 3px;
    font-size: 0.8rem;
    color: red;
-   max-width: 70%;
 }
 
 .showing-error {
@@ -240,8 +250,6 @@ form button {
 .social img {
    width: 25%;
 }
-
-
 
 /* FOOTER */
 
@@ -361,10 +369,14 @@ form button {
 
    .center {
       width: 100%;
+      border-left: 5px solid black;
+      padding: 0px 30px;
    }
 
    .form {
       width: 100%;
+      border-left: 5px solid black;
+      padding: 0px 30px;
    }
 
    .center-and-weather {
@@ -372,7 +384,7 @@ form button {
    }
 
    nav {
-      padding: 15px;
+      padding: 15px 150px;
    }
 
    .nav-bar-links {
@@ -382,7 +394,7 @@ form button {
    }
 
    .nav-bar-links a:hover{
-      color: var(--redish);
+      color: var(--color1);
       text-decoration: none;
       transition: all 0.3s ease;
    }
@@ -431,12 +443,19 @@ form button {
 
    .center {
       max-width: 800px;
+      border-left: 5px solid black;
+      border-right: 5px solid black;
+      padding: 0px 30px;
    }
   /*FORM  */
    form {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+   }
+
+   .form {
+      border-right: 5px solid black;
    }
 
    form > div {

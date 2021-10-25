@@ -195,7 +195,7 @@ window.onload = function () {
          showError(postalCodeInput, 8);
       }
    }
-   postalCodeInput.addEventListener('blur' , checkPostalCode);
+   postalCodeInput.addEventListener('blur', checkPostalCode);
 
    //id
    function checkId() {
@@ -225,7 +225,6 @@ window.onload = function () {
             //set up the url to send parameters
             url = 'https://curso-dev-2021.herokuapp.com/newsletter';
             informationToSend = '?'; 
-            
             //create the fullparameter list
             for (let i = 0; i < inputList.length; i++) {
                informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
@@ -239,8 +238,8 @@ window.onload = function () {
 
             fetch(fullUrl)
                .then(res => res.json())
-               .then((data) => showSuccessfulFetch(data))
-               .catch((error) => showErrorFetch(error))
+               .then(data => showSuccessfulFetch(data))
+               .catch(error => showErrorFetch(error))
 
          } else { showErrorValidation(); }
    })
@@ -264,6 +263,8 @@ window.onload = function () {
    var showErrorFetch = (err) => {
       modal.style.display = 'flex';
       modalContent.innerHTML = err;
+      console.log(err);
+      console.log('catch');
    }
 
    var showErrorValidation = () => {
