@@ -67,6 +67,12 @@ header {
    -moz-text-fill-color: transparent;
    font-size: 2rem;
    padding-left: 1rem;
+   min-width: 300px;
+}
+
+#flex-news:hover {
+   font-size: 2.5rem;
+   transition: all 0.3s ease;
 }
 
 .hamburger-icon img {
@@ -150,6 +156,10 @@ form {
    display: flex;
    flex-direction: column;
    align-items: center;
+}
+
+form span {
+   width: 70%;
 }
 
 form > div {
@@ -355,7 +365,7 @@ form button:hover {
 
 #modal__content {
    padding: var(--gap);
-   font-size: 10px;
+   padding-left: 25px;
 }
 
 #modal__content li {

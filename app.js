@@ -25,7 +25,7 @@ window.onload = function () {
    var postalCodeInput = document.getElementById('postal-code');
    var idInput = document.getElementById('id');
 
-   //ALL INPUTS AS AN ARRAY //could I have done this before with .getElementByClassName or Name?
+   //ALL INPUTS AS AN ARRAY //
    var inputList = [
       nameInput,
       emailInput,
@@ -38,13 +38,12 @@ window.onload = function () {
       postalCodeInput,
       idInput
    ]
-   console.log(inputList)
 
    //FLAGS ARRAY FOR BUTTON AT THE END
    var flags = [];
 
    //INITIALIZE. A 0 means there is no input value or that the validation is not passed
-   for (let i = 0; i < 10; i++) {
+   for (let i = 0; i < inputList.length; i++) {
       flags[i] = 0;
    }
 
@@ -221,25 +220,24 @@ window.onload = function () {
          for (let i = 0; i < flags.length; i++) {
             sum += flags[i];
          }
-         if(sum === 10) { 
+         if(sum === inputList.length) { 
+
             //set up the url to send parameters
-            url = 'https://curso-dev-2021.herokuapp.com/newsletter';
-            informationToSend = '?'; 
+            var url = 'https://curso-dev-2021.herokuapp.com/newsletter';
+            var informationToSend = '?'; 
+
             //create the fullparameter list
             for (let i = 0; i < inputList.length; i++) {
-               informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
+               var informationToSend = informationToSend + inputList[i].id + '=' + inputList[i].value + '&';
             }
 
-            //replace spaces with %20
-            var noSpacesInformationToSend = informationToSend.replace(/\s/g, '%20');
-
             //complete url
-            fullUrl = url + noSpacesInformationToSend;
+            fullUrl = url + informationToSend;
 
             fetch(fullUrl)
                .then(res => res.json())
-               .then(data => showSuccessfulFetch(data))
-               .catch(error => showErrorFetch(error))
+               .then(showSuccessfulFetch)
+               .catch(showErrorFetch)
 
          } else { showErrorValidation(); }
    })
@@ -250,8 +248,10 @@ window.onload = function () {
       modal.style.display = 'flex';
       modalTitle.innerHTML = "Successful Register!!";
       for (const property in data) {
-         console.log(data[property]);
-         modalContent.innerHTML += `<li>${property}: ${data[property]}</li>`
+         if(property != 'password' && property != 'confirm-password'){
+            modalContent.innerHTML += `<li>${property}: ${data[property]}</li>`
+         }
+         console.log(property)
       }
       
       //saving data on local Storage
@@ -264,12 +264,27 @@ window.onload = function () {
       modal.style.display = 'flex';
       modalContent.innerHTML = err;
       console.log(err);
-      console.log('catch');
+      console.log('entered catch');
    }
 
    var showErrorValidation = () => {
       modal.style.display = 'flex';
-      modalContent.innerHTML = 'validation not passed';
+
+
+      var errorPos = [];
+      for (let i = 0; i < 10; i++) {
+         if(flags[i] == 0)
+         {
+            errorPos.push(i);
+         }
+      }
+
+      //then I make another array with the error messages and show it on alert
+      var errorPosMessage = [];
+      for (let i = 0; i < errorPos.length; i++) {
+         errorPosMessage[i] = errorMessages[errorPos[i]].innerHTML;
+         modalContent.innerHTML += `<li>${errorPosMessage[i]}</li>`
+      }
    }
 
    //MODAL
@@ -294,9 +309,12 @@ window.onload = function () {
          inputList[i].dispatchEvent(new Event('blur'));
       }
    }
+   var nameSpan = document.getElementById('nameh2');
+   nameSpan.innerHTML = inputList[0].value;
 }
 
 //AUTO NAME
+
 function getName(event) {
    var nameSpan = document.getElementById('nameh2');
    nameSpan.innerText = event.target.value;

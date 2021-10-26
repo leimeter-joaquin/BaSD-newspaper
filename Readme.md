@@ -4,10 +4,6 @@
 Joaquin Leimeter
 leimeter.joaquin@gmail.com
 
-## Date
-created 14/10/2021
-last change: 18/10/2021
-
 ## Content
 | file | description |
 | ------ | ------ |
@@ -19,8 +15,12 @@ last change: 18/10/2021
 | readme.md | THIS |
 
 ## Objective
+### week 5
 to crate a form page using the same styles that we have on index.html.
 The form must be responsive and it has to validate all inputs following cetain rules.
+
+### week 6
+We have to make it so that when the form is validated, we send the information to the server:. Then we get back an object with the user info. We save this information in Local Storage and fill the inputs on load.
 
 ## To visualize
 Open index.html or subscription.html on any browser. You can navigate between the two clicking on "home" and "subscription"
